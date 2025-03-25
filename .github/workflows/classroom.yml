@@ -1,0 +1,92 @@
+name: Autograding Tests
+'on': push
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Test Number of Provinces
+      - name: Test Number of Provinces
+        id: test-number-provinces
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Number of Provinces
+          command: python -m unittest test_real.TestNumberProvinces
+          timeout: 10
+          max-score: 10
+
+      # Test Number of Connected Islands
+      - name: Test Number of Connected Islands
+        id: test-number-connected-islands
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Number of Connected Islands
+          command: python -m unittest test_real.TestNumberConnectedIslands
+          timeout: 10
+          max-score: 10
+
+      # Test Number of Diagonally Connected Islands
+      - name: Test Number of Diagonally Connected Islands
+        id: test-number-diagonal-islands
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Number of Diagonally Connected Islands
+          command: python -m unittest test_real.TestNumberDiagonal
+          timeout: 10
+          max-score: 10
+
+      # Test Max Area of Island
+      - name: Test Max Area of Island
+        id: test-max-area-island
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Max Area of Island
+          command: python -m unittest test_real.TestMaxArea
+          timeout: 10
+          max-score: 10
+
+      # Test Can Visit All Rooms
+      - name: Test Can Visit All Rooms
+        id: test-can-visit-rooms
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Can Visit All Rooms
+          command: python -m unittest test_real.TestCanVisit
+          timeout: 10
+          max-score: 10
+
+      # Test Rotting Oranges
+      - name: Test Rotting Oranges
+        id: test-rotting-oranges
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Rotting Oranges
+          command: python -m unittest test_real.TestRottingOranges
+          timeout: 10
+          max-score: 10
+
+      # Autograding Reporter
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          TEST-NUMBER-PROVINCES_RESULTS: "${{steps.test-number-provinces.outputs.result}}"
+          TEST-NUMBER-CONNECTED-ISLANDS_RESULTS: "${{steps.test-number-connected-islands.outputs.result}}"
+          TEST-NUMBER-DIAGONAL-ISLANDS_RESULTS: "${{steps.test-number-diagonal-islands.outputs.result}}"
+          TEST-MAX-AREA-ISLAND_RESULTS: "${{steps.test-max-area-island.outputs.result}}"
+          TEST-CAN-VISIT-ROOMS_RESULTS: "${{steps.test-can-visit-rooms.outputs.result}}"
+          TEST-ROTTING-ORANGES_RESULTS: "${{steps.test-rotting-oranges.outputs.result}}"
+        with:
+          runners: >
+            test-number-provinces,
+            test-number-connected-islands,
+            test-number-diagonal-islands,
+            test-max-area-island,
+            test-can-visit-rooms,
+            test-rotting-oranges
