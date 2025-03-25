@@ -18,7 +18,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Number of Provinces
-          command: python -m unittest test_real.TestNumberProvinces
+          command: python -m unittest test_week4.TestNumberProvinces
           timeout: 10
           max-score: 10
 
@@ -28,7 +28,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Number of Connected Islands
-          command: python -m unittest test_real.TestNumberConnectedIslands
+          command: python -m unittest test_week4.TestNumberConnectedIslands
           timeout: 10
           max-score: 10
 
@@ -38,7 +38,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Number of Diagonally Connected Islands
-          command: python -m unittest test_real.TestNumberDiagonal
+          command: python -m unittest test_week4.TestNumberDiagonal
           timeout: 10
           max-score: 10
 
@@ -48,7 +48,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Max Area of Island
-          command: python -m unittest test_real.TestMaxArea
+          command: python -m unittest test_week4.TestMaxArea
           timeout: 10
           max-score: 10
 
@@ -58,7 +58,7 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Can Visit All Rooms
-          command: python -m unittest test_real.TestCanVisit
+          command: python -m unittest test_week4.TestCanVisit
           timeout: 10
           max-score: 10
 
@@ -68,8 +68,18 @@ jobs:
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: Test Rotting Oranges
-          command: python -m unittest test_real.TestRottingOranges
+          command: python -m unittest test_week4.TestRottingOranges
           timeout: 10
+          max-score: 10
+
+      # Test Water Jugs
+      - name: Test Water Jugs
+        id: test-water-jugs
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: Test Water Jugs
+          command: python -m unittest test_week4.TestWaterJugs
+          timeout: 20
           max-score: 10
 
       # Autograding Reporter
@@ -82,6 +92,7 @@ jobs:
           TEST-MAX-AREA-ISLAND_RESULTS: "${{steps.test-max-area-island.outputs.result}}"
           TEST-CAN-VISIT-ROOMS_RESULTS: "${{steps.test-can-visit-rooms.outputs.result}}"
           TEST-ROTTING-ORANGES_RESULTS: "${{steps.test-rotting-oranges.outputs.result}}"
+          TEST-WATER-JUGS_RESULTS: "${{steps.test-water-jugs.outputs.result}}"
         with:
           runners: >
             test-number-provinces,
@@ -89,4 +100,5 @@ jobs:
             test-number-diagonal-islands,
             test-max-area-island,
             test-can-visit-rooms,
-            test-rotting-oranges
+            test-rotting-oranges,
+            test-water-jugs
