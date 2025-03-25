@@ -89,26 +89,26 @@ class TestMaxArea(unittest.TestCase):
     def test_max_area_of_island(self):
         # Standard case
         self.assertEqual(max_area_of_island([
-            [1,1,0,0,0],
-            [1,1,0,0,0],
-            [0,0,0,1,1],
-            [0,0,0,1,1]
+            ['1','1','0','0','0'],
+            ['1','1','0','0','0'],
+            ['0','0','0','1','1'],
+            ['0','0','0','1','1']
         ]), 4)
         # Single cell island
-        self.assertEqual(max_area_of_island([[1]]), 1)
+        self.assertEqual(max_area_of_island([['1']]), 1)
         # No islands
-        self.assertEqual(max_area_of_island([[0]]), 0)
+        self.assertEqual(max_area_of_island([['0']]), 0)
         # Multiple islands with varying sizes
         self.assertEqual(max_area_of_island([
-            [1,0,1,1],
-            [1,0,1,0],
-            [0,1,0,0],
-            [1,1,0,1]
-        ]), 4)
+            ['1','0','1','1'],
+            ['1','0','1','0'],
+            ['0','1','0','0'],
+            ['1','1','0','1']
+        ]), 3)
         # All land
         self.assertEqual(max_area_of_island([
-            [1,1],
-            [1,1]
+            ['1','1'],
+            ['1','1']
         ]), 4)
 
 class TestCanVisit(unittest.TestCase):
